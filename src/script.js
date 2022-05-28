@@ -70,6 +70,10 @@ const sizes = {
 };
 let mouse = new THREE.Vector2(0.0, 0.0);
 let mouseTarget = new THREE.Vector2(0.0, 0.0);
+document.addEventListener('mousemove', (event) => {
+    mouse.x = (event.clientX / sizes.width) * 2 - 1;
+    mouse.y = -(event.clientY / sizes.height) * 2 + 1;
+});
 window.addEventListener('resize', () => {
     // Update sizes
     sizes.width = window.innerWidth;
