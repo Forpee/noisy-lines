@@ -1,5 +1,6 @@
 uniform float uTime;
 uniform vec2 uResolution;
+uniform float uRotate;
 
 varying vec2 vUv;
 
