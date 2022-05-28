@@ -69,7 +69,7 @@ void main()
     vec2 newUv=gl_FragCoord.xy/uResolution.xy;
     newUv=rotate(newUv,uRotate);
     float noise=cnoise(newUv);
-    // newUv+=vec2(noise);
+    newUv+=vec2(noise);
     newUv=vec2(fract((newUv.x)*15.),newUv.y);
     
     gl_FragColor=vec4(vec3(line(newUv,lineWidth)),1.);
