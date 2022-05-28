@@ -13,24 +13,11 @@ float aastep(float threshold,float value){
     #endif
 }
 
-float line(vec2 uv){
-    float u=0.;
-    u=aastep(.1,uv.x);
-    return u;
-}
-
-vec2 rotate(vec2 v,float a){
-    float s=sin(a);
-    float c=cos(a);
-    mat2 m=mat2(c,-s,s,c);
-    return m*v;
-}
-
 //	Classic Perlin 2D Noise
 //	by Stefan Gustavson
 //
 vec2 fade(vec2 t){return t*t*t*(t*(t*6.-15.)+10.);}
-
+vec4 permute(vec4 x){return mod(((x*34.)+1.)*x,289.);}
 float cnoise(vec2 P){
     vec4 Pi=floor(P.xyxy)+vec4(0.,0.,1.,1.);
     vec4 Pf=fract(P.xyxy)-vec4(0.,0.,1.,1.);
@@ -64,11 +51,26 @@ float cnoise(vec2 P){
     return 2.3*n_xy;
 }
 
+float line(vec2 uv,float width){
+    float u=0.;
+    u=aastep(width,uv.x)-aastep(1.-width,uv.x);
+    return u;
+}
+
+vec2 rotate(vec2 v,float a){
+    float s=sin(a);
+    float c=cos(a);
+    mat2 m=mat2(c,-s,s,c);
+    return m*v;
+}
+
 void main()
 {
     vec2 newUv=gl_FragCoord.xy/uResolution.xy;
     newUv=rotate(newUv,uRotate);
-    newUv=vec2(fract((newUv.x+newUv.y)*15.),newUv.y);
+    float noise=cnoise(newUv);
+    // newUv+=vec2(noise);
+    newUv=vec2(fract((newUv.x)*15.),newUv.y);
     
-    gl_FragColor=vec4(vec3(line(newUv)),1.);
+    gl_FragColor=vec4(vec3(line(newUv,lineWidth)),1.);
 }

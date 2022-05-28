@@ -12,12 +12,12 @@ import gsap from 'gsap';
 const gui = new dat.GUI();
 const params = {
     uRotate: 0.0,
-    lineWidth: 1.0,
+    lineWidth: 0.3,
 };
 gui.add(params, 'uRotate', 0.0, Math.PI).step(0.1).onChange((value) => {
     material.uniforms.uRotate.value = value;
 });
-gui.add(params, 'lineWidth', 0.0, 10.0).step(0.1).onChange((value) => {
+gui.add(params, 'lineWidth', 0.0, 1.0).step(0.1).onChange((value) => {
     material.uniforms.lineWidth.value = value;
 });
 
@@ -39,7 +39,7 @@ const material = new THREE.ShaderMaterial({
         uTime: { value: 0 },
         uResolution: { value: new THREE.Vector2(window.innerWidth, window.innerHeight) },
         uRotate: { value: 0.0 },
-        lineWidth: { value: 1.0 },
+        lineWidth: { value: 0.3 },
     },
     vertexShader: vertexShader,
     fragmentShader: fragmentShader,
