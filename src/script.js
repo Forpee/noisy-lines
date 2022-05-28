@@ -13,12 +13,17 @@ const gui = new dat.GUI();
 const params = {
     uRotate: 0.0,
     lineWidth: 0.1,
+    repeat: 10
 };
 gui.add(params, 'uRotate', 0.0, Math.PI).step(0.1).onChange((value) => {
     material.uniforms.uRotate.value = value;
 });
 gui.add(params, 'lineWidth', 0.0, 1.0).step(0.01).onChange((value) => {
     material.uniforms.lineWidth.value = value;
+});
+
+gui.add(params, 'repeat').min(1.0).max(100.0).step(1).onChange((value) => {
+    material.uniforms.repeat.value = value;
 });
 
 // Canvas
@@ -40,6 +45,7 @@ const material = new THREE.ShaderMaterial({
         uResolution: { value: new THREE.Vector2(window.innerWidth, window.innerHeight) },
         uRotate: { value: 0.0 },
         lineWidth: { value: 0.1 },
+        repeat: { value: 10.0 },
     },
     vertexShader: vertexShader,
     fragmentShader: fragmentShader,

@@ -2,6 +2,7 @@ uniform float uTime;
 uniform vec2 uResolution;
 uniform float uRotate;
 uniform float lineWidth;
+uniform float repeat;
 varying vec2 vUv;
 
 float aastep(float threshold,float value){
@@ -53,7 +54,14 @@ float cnoise(vec2 P){
 
 float line(vec2 uv,float width){
     float u=0.;
-    u=aastep(width,uv.x)-aastep(1.-width,uv.x);
+    if(uv.x<.01){
+        u=0.;
+    }else if(uv.x>.99){
+        u=0.;
+    }else{
+        u=aastep(width,uv.x)-aastep(1.-width,uv.x);
+        
+    }
     return u;
 }
 
@@ -70,7 +78,7 @@ void main()
     newUv=rotate(newUv,uRotate);
     float noise=cnoise(newUv);
     newUv+=vec2(noise);
-    newUv=vec2(fract((newUv.x)*15.),newUv.y);
+    newUv=vec2(fract((newUv.x)*repeat),newUv.y);
     
     gl_FragColor=vec4(vec3(line(newUv,lineWidth)),1.);
 }
