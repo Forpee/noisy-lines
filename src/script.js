@@ -124,18 +124,19 @@ const clock = new THREE.Clock();
 const loader = new FontLoader();
 
 loader.load('/font.json', function (font) {
-    console.log(font);
+    // console.log(font);
     const geometry = new TextGeometry('Hello three.js!', {
         font: font,
-        size: 80,
-        height: 5,
+        size: 0.4,
+        height: 0.2,
         curveSegments: 12,
-        bevelEnabled: true,
-        bevelThickness: 10,
-        bevelSize: 8,
-        bevelOffset: 0,
-        bevelSegments: 5
+        bevelEnabled: false,
+        // bevelThickness: 10,
+        // bevelSize: 8,
+        // bevelOffset: 0,
+        // bevelSegments: 5
     });
+    scene.add(new THREE.Mesh(geometry, material));
 });
 
 const tick = () => {
