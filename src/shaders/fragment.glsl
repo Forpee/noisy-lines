@@ -4,6 +4,7 @@ uniform float uRotate;
 uniform float lineWidth;
 uniform float repeat;
 varying vec2 vUv;
+varying vec3 vPosition;
 
 float aastep(float threshold,float value){
     #ifdef GL_OES_standard_derivatives
@@ -74,9 +75,9 @@ vec2 rotate(vec2 v,float a){
 
 void main()
 {
-    vec2 newUv=gl_FragCoord.xy/uResolution.xy;
+    vec2 newUv=vPosition.xy;
     newUv=rotate(newUv,uRotate);
-    float noise=cnoise(newUv);
+    float noise=cnoise(newUv+uTime/10.+vPosition.z);
     newUv+=vec2(noise);
     newUv=vec2(fract((newUv.x)*repeat),newUv.y);
     
