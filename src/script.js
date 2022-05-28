@@ -10,6 +10,12 @@ import gsap from 'gsap';
  */
 // Debug
 const gui = new dat.GUI();
+const params = {
+    uRotate: 0.0,
+};
+gui.add(params, 'uRotate', 0.0, 1.0).step(0.1).onChange((value) => {
+    material.uniforms.uRotate.value = value;
+});
 
 // Canvas
 const canvas = document.querySelector('canvas.webgl');
@@ -28,6 +34,7 @@ const material = new THREE.ShaderMaterial({
     uniforms: {
         uTime: { value: 0 },
         uResolution: { value: new THREE.Vector2(window.innerWidth, window.innerHeight) },
+        uRotate: { value: 0.0 },
     },
     vertexShader: vertexShader,
     fragmentShader: fragmentShader,
