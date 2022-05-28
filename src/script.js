@@ -14,10 +14,12 @@ const params = {
     uRotate: 0.0,
     lineWidth: 1.0,
 };
-gui.add(params, 'uRotate', 0.0, 6.0).step(0.1).onChange((value) => {
+gui.add(params, 'uRotate', 0.0, Math.PI).step(0.1).onChange((value) => {
     material.uniforms.uRotate.value = value;
 });
-gui.add(params, 'lineWidth', 0.0, 10.0).step(0.1);
+gui.add(params, 'lineWidth', 0.0, 10.0).step(0.1).onChange((value) => {
+    material.uniforms.lineWidth.value = value;
+});
 
 // Canvas
 const canvas = document.querySelector('canvas.webgl');
@@ -37,6 +39,7 @@ const material = new THREE.ShaderMaterial({
         uTime: { value: 0 },
         uResolution: { value: new THREE.Vector2(window.innerWidth, window.innerHeight) },
         uRotate: { value: 0.0 },
+        lineWidth: { value: 1.0 },
     },
     vertexShader: vertexShader,
     fragmentShader: fragmentShader,
