@@ -12,10 +12,12 @@ import gsap from 'gsap';
 const gui = new dat.GUI();
 const params = {
     uRotate: 0.0,
+    lineWidth: 1.0,
 };
-gui.add(params, 'uRotate', 0.0, 1.0).step(0.1).onChange((value) => {
+gui.add(params, 'uRotate', 0.0, 6.0).step(0.1).onChange((value) => {
     material.uniforms.uRotate.value = value;
 });
+gui.add(params, 'lineWidth', 0.0, 10.0).step(0.1);
 
 // Canvas
 const canvas = document.querySelector('canvas.webgl');
@@ -90,7 +92,8 @@ controls.enableDamping = true;
  * Renderer
  */
 const renderer = new THREE.WebGLRenderer({
-    canvas: canvas
+    canvas: canvas,
+    antialias: true,
 });
 renderer.setSize(sizes.width, sizes.height);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
