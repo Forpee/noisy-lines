@@ -16,7 +16,7 @@ const gui = new dat.GUI();
 const params = {
     uRotate: 0.0,
     lineWidth: 0.45,
-    repeat: 10
+    repeat: 30
 };
 gui.add(params, 'uRotate', 0.0, Math.PI).step(0.1).onChange((value) => {
     material.uniforms.uRotate.value = value;
@@ -48,7 +48,7 @@ const material = new THREE.ShaderMaterial({
         uResolution: { value: new THREE.Vector2(window.innerWidth, window.innerHeight) },
         uRotate: { value: 0.0 },
         lineWidth: { value: 0.45 },
-        repeat: { value: 10.0 },
+        repeat: { value: 30.0 },
     },
     vertexShader: vertexShader,
     fragmentShader: fragmentShader,
@@ -61,7 +61,7 @@ scene.add(mesh);
 // Add boxbuffergeometry
 const boxGeometry = new THREE.BoxBufferGeometry(0.5, 0.5, 0.5).translate(0, 0, -0.1);
 const boxMesh = new THREE.Mesh(boxGeometry, material);
-scene.add(boxMesh);
+// scene.add(boxMesh);
 boxMesh.position.z = 0.1;
 
 /**
@@ -122,7 +122,7 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 const clock = new THREE.Clock();
 
 const loader = new FontLoader();
-const textMesh;
+let textMesh;
 loader.load('/font.json', function (font) {
     // console.log(font);
     const geometry = new TextGeometry('Hello', {
@@ -153,7 +153,6 @@ const tick = () => {
     material.uniforms.uTime.value = elapsedTime;
     mouseTarget.x -= 0.1 * (mouseTarget.x - mouse.x);
     mouseTarget.y -= 0.1 * (mouseTarget.y - mouse.y);
-
 
     if (textMesh) {
 
