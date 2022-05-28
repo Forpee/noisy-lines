@@ -1,4 +1,5 @@
 uniform float uTime;
+uniform vec2 uResolution;
 
 varying vec2 vUv;
 
@@ -19,6 +20,6 @@ float line(vec2 uv){
 
 void main()
 {
-    
+    vec2 newUv=gl_FragCoord.xy/uResolution.xy;
     gl_FragColor=vec4(vUv,1.,1.);
 }
