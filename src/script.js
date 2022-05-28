@@ -7,6 +7,7 @@ import fragmentShader from './shaders/fragment.glsl';
 import gsap from 'gsap';
 // import FontLoader from 'examples/jsm/loader/FontLoader.js';
 import { FontLoader } from 'three/examples/jsm/loaders/FontLoader';
+import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js';
 /**
  * Base
  */
@@ -123,7 +124,7 @@ const clock = new THREE.Clock();
 const loader = new FontLoader();
 
 loader.load('/font.json', function (font) {
-
+    console.log(font);
     const geometry = new TextGeometry('Hello three.js!', {
         font: font,
         size: 80,
