@@ -68,7 +68,8 @@ const sizes = {
     width: window.innerWidth,
     height: window.innerHeight
 };
-
+let mouse = new THREE.Vector2(0.0, 0.0);
+let mouseTarget = new THREE.Vector2(0.0, 0.0);
 window.addEventListener('resize', () => {
     // Update sizes
     sizes.width = window.innerWidth;
