@@ -27,7 +27,7 @@ const geometry = new THREE.PlaneBufferGeometry(1, 1, 32, 32);
 const material = new THREE.ShaderMaterial({
     uniforms: {
         uTime: { value: 0 },
-        resolution: { value: new THREE.Vector2(window.innerWidth, window.innerHeight) },
+        uResolution: { value: new THREE.Vector2(window.innerWidth, window.innerHeight) },
     },
     vertexShader: vertexShader,
     fragmentShader: fragmentShader,
@@ -37,6 +37,10 @@ const material = new THREE.ShaderMaterial({
 // Mesh
 const mesh = new THREE.Mesh(geometry, material);
 scene.add(mesh);
+// Add boxbuffergeometry
+const boxGeometry = new THREE.BoxBufferGeometry(0.5, 0.5, 0.5);
+const boxMesh = new THREE.Mesh(boxGeometry, material);
+scene.add(boxMesh);
 
 /**
  * Sizes

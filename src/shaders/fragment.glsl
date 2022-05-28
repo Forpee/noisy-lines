@@ -21,5 +21,7 @@ float line(vec2 uv){
 void main()
 {
     vec2 newUv=gl_FragCoord.xy/uResolution.xy;
-    gl_FragColor=vec4(vUv,1.,1.);
+    newUv=vec2(fract((newUv.x+newUv.y)*15.),newUv.y);
+    
+    gl_FragColor=vec4(vec3(line(newUv)),1.);
 }
