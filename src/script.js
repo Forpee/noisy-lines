@@ -122,13 +122,13 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 const clock = new THREE.Clock();
 
 const loader = new FontLoader();
-
+const textMesh;
 loader.load('/font.json', function (font) {
     // console.log(font);
-    const geometry = new TextGeometry('Hello three.js!', {
+    const geometry = new TextGeometry('Hello', {
         font: font,
-        size: 0.4,
-        height: 0.2,
+        size: 0.1,
+        height: 0.05,
         curveSegments: 12,
         bevelEnabled: false,
         // bevelThickness: 10,
@@ -136,7 +136,10 @@ loader.load('/font.json', function (font) {
         // bevelOffset: 0,
         // bevelSegments: 5
     });
-    scene.add(new THREE.Mesh(geometry, material));
+    geometry.translate(-0.4, 0, -0.05);
+    textMesh = new THREE.Mesh(geometry, material);
+    textMesh.position.z = 0.1;
+    scene.add(textMesh);
 });
 
 const tick = () => {
@@ -150,8 +153,13 @@ const tick = () => {
     material.uniforms.uTime.value = elapsedTime;
     mouseTarget.x -= 0.1 * (mouseTarget.x - mouse.x);
     mouseTarget.y -= 0.1 * (mouseTarget.y - mouse.y);
-    boxMesh.rotation.y = mouseTarget.x;
-    boxMesh.rotation.x = mouseTarget.y;
+
+
+    if (textMesh) {
+
+        textMesh.rotation.y = mouseTarget.x;
+        textMesh.rotation.x = mouseTarget.y;
+    }
     // Render
     renderer.render(scene, camera);
 
