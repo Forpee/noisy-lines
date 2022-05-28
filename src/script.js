@@ -12,7 +12,7 @@ import gsap from 'gsap';
 const gui = new dat.GUI();
 const params = {
     uRotate: 0.0,
-    lineWidth: 0.1,
+    lineWidth: 0.45,
     repeat: 10
 };
 gui.add(params, 'uRotate', 0.0, Math.PI).step(0.1).onChange((value) => {
@@ -44,7 +44,7 @@ const material = new THREE.ShaderMaterial({
         uTime: { value: 0 },
         uResolution: { value: new THREE.Vector2(window.innerWidth, window.innerHeight) },
         uRotate: { value: 0.0 },
-        lineWidth: { value: 0.1 },
+        lineWidth: { value: 0.45 },
         repeat: { value: 10.0 },
     },
     vertexShader: vertexShader,
@@ -56,9 +56,10 @@ const material = new THREE.ShaderMaterial({
 const mesh = new THREE.Mesh(geometry, material);
 scene.add(mesh);
 // Add boxbuffergeometry
-const boxGeometry = new THREE.BoxBufferGeometry(0.5, 0.5, 0.5);
+const boxGeometry = new THREE.BoxBufferGeometry(0.5, 0.5, 0.5).translate(0, 0, -0.1);
 const boxMesh = new THREE.Mesh(boxGeometry, material);
 scene.add(boxMesh);
+boxMesh.position.z = 0.1;
 
 /**
  * Sizes
