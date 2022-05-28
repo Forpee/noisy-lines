@@ -11,7 +11,14 @@ float aastep(float threshold,float value){
     #endif
 }
 
+float line(vec2 uv){
+    float u=0.;
+    u=aastep(.1,uv.x);
+    return u;
+}
+
 void main()
 {
+    
     gl_FragColor=vec4(vUv,1.,1.);
 }
